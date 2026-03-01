@@ -3,7 +3,7 @@ name: 🚀 Build and Deploy to InfinityFree
 on:
   push:
     branches:
-      - main
+      - main  # Make sure this matches your branch name (main or master)
 
 jobs:
   build-and-deploy:
@@ -15,7 +15,7 @@ jobs:
       - name: 🛠️ Install and Build
         run: |
           npm install
-          npm run build  # This creates the 'dist' folder
+          npm run build  # This creates the 'dist' folder with your updated title
 
       - name: 📂 Sync Dist to InfinityFree
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
@@ -23,5 +23,5 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./dist/      # Only upload the built website
-          server-dir: ./htdocs/   # Put it where InfinityFree can see it
+          local-dir: ./dist/      # ONLY upload the built website
+          server-dir: ./htdocs/   # Put it exactly where InfinityFree looks
