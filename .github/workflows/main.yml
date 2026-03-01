@@ -1,21 +1,27 @@
-on: 
+name: 🚀 Build and Deploy to InfinityFree
+
+on:
   push:
     branches:
-      - main # or master, depending on your branch name
-
-name: 🚀 Deploy Website to InfinityFree
+      - main
 
 jobs:
-  web-deploy:
-    name: 🎉 Deploy
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-    - name: 🚚 Get latest code
-      uses: actions/checkout@v3
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v3
 
-    - name: 📂 Sync files to InfinityFree
-      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
-      with:
-        server: ${{ secrets.FTP_SERVER }}
-        username: ${{ secrets.FTP_USERNAME }}
-        password: ${{ secrets.FTP_PASSWORD }}
+      - name: 🛠️ Install and Build
+        run: |
+          npm install
+          npm run build  # This creates the 'dist' folder
+
+      - name: 📂 Sync Dist to InfinityFree
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./dist/      # Only upload the built website
+          server-dir: ./htdocs/   # Put it where InfinityFree can see it
