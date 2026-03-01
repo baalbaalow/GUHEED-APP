@@ -78,7 +78,7 @@ const TRANSLATIONS = {
     download: "Download Flyer"
   },
   so: {
-    title: "GUHEEDe",
+    title: "GUHEED",
     subtitle: "Naqshadeeyaha Flyer-ka Ganacsigaga",
     greeting: "Haye! Waxaan ahay naqshadeeyahaaga flyer-ka. Fadlan soo geli sawirka alaabtaada si aan u bilaowno.",
     uploadPrompt: "Guji ama halkan ku soo tuur sawirka alaabta",
