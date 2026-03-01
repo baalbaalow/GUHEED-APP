@@ -1,4 +1,4 @@
-name: Deploy to InfinityFree
+name: Build and Deploy to InfinityFree
 on:
   push:
     branches:
@@ -15,6 +15,8 @@ jobs:
       run: |
         npm install
         npm run build
+      env:
+        VITE_OPENROUTER_API_KEY: ${{ secrets.VITE_OPENROUTER_API_KEY }}
 
     - name: 🚀 Sync files to Server
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4
@@ -22,5 +24,5 @@ jobs:
         server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        local-dir: ./dist/  # This sends the finished app from the 'dist' folder
+        local-dir: ./dist/
         server-dir: /htdocs/
